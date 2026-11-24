@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Advanced Data Structures & Design — 38 Question Master Sheet</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #fff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --blue: #3157d5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    header {
+      background: #172554;
+      color: #fff;
+      padding: 27px 20px;
+    }
+    header > div, main {
+      max-width: 1180px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 0 0 6px;
+    }
+    header p {
+      margin: 0;
+      color: #dbeafe;
+      max-width: 900px;
+    }
+    main { padding: 20px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .stat, .controls, .section, .note {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+    }
+    .stat { padding: 13px 15px; }
+    .stat strong { display: block; font-size: 23px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .progress {
+      height: 7px;
+      background: #e9edf5;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .bar { height: 100%; background: var(--blue); width: 0; }
+    .controls {
+      padding: 13px;
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .controls input, .controls select, .controls button {
+      font: inherit;
+      border: 1px solid #cfd4dc;
+      background: #fff;
+      border-radius: 9px;
+      padding: 9px 11px;
+      color: var(--ink);
+    }
+    .controls input { flex: 1; min-width: 200px; }
+    .controls button { cursor: pointer; }
+    .section { overflow: hidden; margin-bottom: 17px; }
+    .section-head {
+      padding: 15px 17px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .section-head h2 { font-size: 18px; margin: 0; }
+    .section-head p { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 11px 13px;
+      border-bottom: 1px solid #edf0f4;
+      vertical-align: top;
+    }
+    th {
+      font-size: 11px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: #fafbfc;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .qtitle { font-weight: 650; }
+    .meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .Easy { background: #dcfce7; color: #166534; }
+    .Medium { background: #fef3c7; color: #92400e; }
+    .Hard { background: #fee2e2; color: #991b1b; }
+    .check {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+    .links { white-space: nowrap; }
+    .links a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 650;
+      margin-right: 10px;
+    }
+    .links a:hover { text-decoration: underline; }
+    .empty { padding: 25px; text-align: center; color: var(--muted); }
+    .note { padding: 14px 16px; margin-top: 16px; }
+    .foot { font-size: 12px; color: var(--muted); padding: 10px 2px 20px; }
+    @media (max-width: 760px) {
+      main { padding: 11px; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      table, tbody, tr, td { display: block; width: 100%; }
+      thead { display: none; }
+      tr { padding: 10px; border-bottom: 1px solid var(--line); }
+      td { padding: 4px 9px; border: 0 !important; }
+      td:first-child { display: flex; align-items: flex-start; gap: 9px; }
+      .links { display: flex; gap: 9px; }
+      .section-head { padding: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Advanced Data Structures & Design — 38 Question Master Sheet</h1>
+      <p>An expanded pattern-wise practice sheet covering LRU/LFU cache & design problems, Segment Trees, Fenwick Trees (BIT), Disjoint Set Union & Advanced/Bitwise Tries, and ordered data structures. Every section progresses Easy → Medium → Hard.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="stats">
+      <div class="stat"><strong id="total">0</strong><span>Total questions</span></div>
+      <div class="stat"><strong id="completed">0</strong><span>Completed</span></div>
+      <div class="stat"><strong id="remaining">0</strong><span>Remaining</span></div>
+      <div class="stat">
+        <strong id="percent">0%</strong><span>Progress</span>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search question, pattern, or keyword…">
+      <select id="difficulty">
+        <option value="">All difficulties</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+      </select>
+      <select id="sectionFilter">
+        <option value="">All patterns</option>
+        <option value="1">1. LRU / LFU Cache & Time-Indexed Design</option>
+        <option value="2">2. Segment Tree (Range Query & Point/Range Update)</option>
+        <option value="3">3. Fenwick Tree (Binary Indexed Tree / BIT)</option>
+        <option value="4">4. Disjoint Set Union (DSU) & Advanced Trie</option>
+        <option value="5">5. Ordered Data Structures (Balanced BST / Skip / Monotonic Maps)</option>
+      </select>
+      <select id="status">
+        <option value="">All progress</option>
+        <option value="done">Completed</option>
+        <option value="todo">Not completed</option>
+      </select>
+      <button id="reset" type="button">Reset progress</button>
+    </div>
+
+    <div id="content"></div>
+
+    <div class="note">
+      <b>Suggested approach:</b> Pick Segment Tree when combining non-invertible functions (min/max/gcd) or lazy range updates, Fenwick Tree for fast prefix sums/inversions, DSU for dynamic connectivity, and doubly-linked/hash/heap combos for O(1) design. Your progress is saved locally in this browser.
+    </div>
+    <div class="foot">
+      GFG links open a targeted GeeksforGeeks search for the question title; verify exact constraints before starting. No repeated question titles.
+    </div>
+  </main>
+
+  <script>
+    const data = [{"id": 1, "section": 1, "pattern": "LRU / LFU Cache & Time-Indexed Design", "title": "Design Hit Counter", "difficulty": "Easy", "slug": "design-hit-counter"}, {"id": 2, "section": 1, "pattern": "LRU / LFU Cache & Time-Indexed Design", "title": "Design Parking System", "difficulty": "Easy", "slug": "design-parking-system"}, {"id": 3, "section": 1, "pattern": "LRU / LFU Cache & Time-Indexed Design", "title": "LRU Cache", "difficulty": "Medium", "slug": "lru-cache"}, {"id": 4, "section": 1, "pattern": "LRU / LFU Cache & Time-Indexed Design", "title": "Design Underground System", "difficulty": "Medium", "slug": "design-underground-system"}, {"id": 5, "section": 1, "pattern": "LRU / LFU Cache & Time-Indexed Design", "title": "Snapshot Array", "difficulty": "Medium", "slug": "snapshot-array"}, {"id": 6, "section": 1, "pattern": "LRU / LFU Cache & Time-Indexed Design", "title": "LFU Cache", "difficulty": "Hard", "slug": "lfu-cache"}, {"id": 7, "section": 1, "pattern": "LRU / LFU Cache & Time-Indexed Design", "title": "All O`one Data Structure", "difficulty": "Hard", "slug": "all-oone-data-structure"}, {"id": 8, "section": 2, "pattern": "Segment Tree (Range Query & Point/Range Update)", "title": "Range Sum Query - Immutable", "difficulty": "Easy", "slug": "range-sum-query-immutable"}, {"id": 9, "section": 2, "pattern": "Segment Tree (Range Query & Point/Range Update)", "title": "Range Sum Query - Mutable", "difficulty": "Medium", "slug": "range-sum-query-mutable"}, {"id": 10, "section": 2, "pattern": "Segment Tree (Range Query & Point/Range Update)", "title": "Range Module", "difficulty": "Hard", "slug": "range-module"}, {"id": 11, "section": 2, "pattern": "Segment Tree (Range Query & Point/Range Update)", "title": "Longest Increasing Subsequence II", "difficulty": "Hard", "slug": "longest-increasing-subsequence-ii"}, {"id": 12, "section": 2, "pattern": "Segment Tree (Range Query & Point/Range Update)", "title": "The Skyline Problem", "difficulty": "Hard", "slug": "the-skyline-problem"}, {"id": 13, "section": 2, "pattern": "Segment Tree (Range Query & Point/Range Update)", "title": "Falling Squares", "difficulty": "Hard", "slug": "falling-squares"}, {"id": 14, "section": 2, "pattern": "Segment Tree (Range Query & Point/Range Update)", "title": "Count of Range Sum", "difficulty": "Hard", "slug": "count-of-range-sum"}, {"id": 15, "section": 2, "pattern": "Segment Tree (Range Query & Point/Range Update)", "title": "Fancy Sequence", "difficulty": "Hard", "slug": "fancy-sequence"}, {"id": 16, "section": 3, "pattern": "Fenwick Tree (Binary Indexed Tree / BIT)", "title": "Sum of All Odd Length Subarrays", "difficulty": "Easy", "slug": "sum-of-all-odd-length-subarrays"}, {"id": 17, "section": 3, "pattern": "Fenwick Tree (Binary Indexed Tree / BIT)", "title": "Range Sum Query 2D - Immutable", "difficulty": "Medium", "slug": "range-sum-query-2d-immutable"}, {"id": 18, "section": 3, "pattern": "Fenwick Tree (Binary Indexed Tree / BIT)", "title": "Range Sum Query 2D - Mutable", "difficulty": "Hard", "slug": "range-sum-query-2d-mutable"}, {"id": 19, "section": 3, "pattern": "Fenwick Tree (Binary Indexed Tree / BIT)", "title": "Count of Smaller Numbers After Self", "difficulty": "Hard", "slug": "count-of-smaller-numbers-after-self"}, {"id": 20, "section": 3, "pattern": "Fenwick Tree (Binary Indexed Tree / BIT)", "title": "Reverse Pairs", "difficulty": "Hard", "slug": "reverse-pairs"}, {"id": 21, "section": 3, "pattern": "Fenwick Tree (Binary Indexed Tree / BIT)", "title": "Create Sorted Array through Instructions", "difficulty": "Hard", "slug": "create-sorted-array-through-instructions"}, {"id": 22, "section": 3, "pattern": "Fenwick Tree (Binary Indexed Tree / BIT)", "title": "Count Good Triplets in an Array", "difficulty": "Hard", "slug": "count-good-triplets-in-an-array"}, {"id": 23, "section": 4, "pattern": "Disjoint Set Union (DSU) & Advanced Trie", "title": "Find if Path Exists in Graph", "difficulty": "Easy", "slug": "find-if-path-exists-in-graph"}, {"id": 24, "section": 4, "pattern": "Disjoint Set Union (DSU) & Advanced Trie", "title": "Redundant Connection", "difficulty": "Medium", "slug": "redundant-connection"}, {"id": 25, "section": 4, "pattern": "Disjoint Set Union (DSU) & Advanced Trie", "title": "Implement Trie (Prefix Tree)", "difficulty": "Medium", "slug": "implement-trie-prefix-tree"}, {"id": 26, "section": 4, "pattern": "Disjoint Set Union (DSU) & Advanced Trie", "title": "Accounts Merge", "difficulty": "Medium", "slug": "accounts-merge"}, {"id": 27, "section": 4, "pattern": "Disjoint Set Union (DSU) & Advanced Trie", "title": "Word Search II", "difficulty": "Hard", "slug": "word-search-ii"}, {"id": 28, "section": 4, "pattern": "Disjoint Set Union (DSU) & Advanced Trie", "title": "Maximum XOR With an Element From Array", "difficulty": "Hard", "slug": "maximum-xor-with-an-element-from-array"}, {"id": 29, "section": 4, "pattern": "Disjoint Set Union (DSU) & Advanced Trie", "title": "Number of Islands II", "difficulty": "Hard", "slug": "number-of-islands-ii"}, {"id": 30, "section": 4, "pattern": "Disjoint Set Union (DSU) & Advanced Trie", "title": "Palindrome Pairs", "difficulty": "Hard", "slug": "palindrome-pairs"}, {"id": 31, "section": 5, "pattern": "Ordered Data Structures (Balanced BST / Skip / Monotonic Maps)", "title": "Kth Largest Element in a Stream", "difficulty": "Easy", "slug": "kth-largest-element-in-a-stream"}, {"id": 32, "section": 5, "pattern": "Ordered Data Structures (Balanced BST / Skip / Monotonic Maps)", "title": "My Calendar I", "difficulty": "Medium", "slug": "my-calendar-i"}, {"id": 33, "section": 5, "pattern": "Ordered Data Structures (Balanced BST / Skip / Monotonic Maps)", "title": "Time Based Key-Value Store", "difficulty": "Medium", "slug": "time-based-key-value-store"}, {"id": 34, "section": 5, "pattern": "Ordered Data Structures (Balanced BST / Skip / Monotonic Maps)", "title": "My Calendar II", "difficulty": "Medium", "slug": "my-calendar-ii"}, {"id": 35, "section": 5, "pattern": "Ordered Data Structures (Balanced BST / Skip / Monotonic Maps)", "title": "Contains Duplicate III", "difficulty": "Hard", "slug": "contains-duplicate-iii"}, {"id": 36, "section": 5, "pattern": "Ordered Data Structures (Balanced BST / Skip / Monotonic Maps)", "title": "Sliding Window Median", "difficulty": "Hard", "slug": "sliding-window-median"}, {"id": 37, "section": 5, "pattern": "Ordered Data Structures (Balanced BST / Skip / Monotonic Maps)", "title": "Design Skiplist", "difficulty": "Hard", "slug": "design-skiplist"}, {"id": 38, "section": 5, "pattern": "Ordered Data Structures (Balanced BST / Skip / Monotonic Maps)", "title": "My Calendar III", "difficulty": "Hard", "slug": "my-calendar-iii"}].map(q => ({
+      ...q,
+      lc: q.slug ? `https://leetcode.com/problems/${q.slug}/` : `https://leetcode.com/problemset/?search=${encodeURIComponent(q.title)}`,
+      gfg: `https://www.geeksforgeeks.org/search/?q=${encodeURIComponent(q.title)}`
+    }));
+
+    const groups = ["1. LRU / LFU Cache & Time-Indexed Design", "2. Segment Tree (Range Query & Point/Range Update)", "3. Fenwick Tree (Binary Indexed Tree / BIT)", "4. Disjoint Set Union (DSU) & Advanced Trie", "5. Ordered Data Structures (Balanced BST / Skip / Monotonic Maps)"];
+
+    data.sort((a, b) => a.section - b.section || ({ Easy: 0, Medium: 1, Hard: 2 }[a.difficulty] - { Easy: 0, Medium: 1, Hard: 2 }[b.difficulty]) || a.id - b.id);
+
+    const KEY = "dsa_advanced_ds_design_master_sheet_progress_v2";
+    const done = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function stats() {
+      const n = done.size;
+      const p = Math.round((n / data.length) * 100);
+      document.getElementById("total").textContent = data.length;
+      document.getElementById("completed").textContent = n;
+      document.getElementById("remaining").textContent = data.length - n;
+      document.getElementById("percent").textContent = p + "%";
+      document.getElementById("bar").style.width = p + "%";
+    }
+
+    function render() {
+      const term = document.getElementById("search").value.toLowerCase().trim();
+      const diff = document.getElementById("difficulty").value;
+      const sec = document.getElementById("sectionFilter").value;
+      const status = document.getElementById("status").value;
+
+      const filtered = data.filter(q =>
+        (!term || (q.title + " " + q.pattern + " " + q.difficulty).toLowerCase().includes(term)) &&
+        (!diff || q.difficulty === diff) &&
+        (!sec || String(q.section) === sec) &&
+        (!status || (status === "done" ? done.has(q.id) : !done.has(q.id)))
+      );
+
+      const root = document.getElementById("content");
+      root.innerHTML = "";
+
+      groups.forEach((g, i) => {
+        const rows = filtered.filter(q => q.section === i + 1);
+        if (!rows.length) return;
+
+        const secEl = document.createElement("section");
+        secEl.className = "section";
+        secEl.innerHTML = `
+          <div class="section-head">
+            <div>
+              <h2>${esc(g)}</h2>
+              <p>${rows.length} matching questions</p>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width:45%">Question / pattern</th>
+                <th>Difficulty</th>
+                <th>Practice links</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map(q => `
+                <tr>
+                  <td>
+                    <div style="display:flex;gap:10px;align-items:flex-start">
+                      <input class="check" type="checkbox" data-id="${q.id}" ${done.has(q.id) ? "checked" : ""} aria-label="Mark ${esc(q.title)} complete">
+                      <div>
+                        <div class="qtitle">${esc(q.title)}</div>
+                        <div class="meta">${esc(q.pattern)}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag ${q.difficulty}">${q.difficulty}</span></td>
+                  <td class="links">
+                    <a href="${esc(q.lc)}" target="_blank" rel="noopener">LeetCode</a>
+                    <a href="${esc(q.gfg)}" target="_blank" rel="noopener">GFG</a>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+        root.appendChild(secEl);
+      });
+
+      if (!root.children.length) {
+        root.innerHTML = '<div class="empty">No questions match these filters.</div>';
+      }
+
+      root.querySelectorAll("input[type=checkbox]").forEach(cb => {
+        cb.addEventListener("change", () => {
+          const id = Number(cb.dataset.id);
+          cb.checked ? done.add(id) : done.delete(id);
+          localStorage.setItem(KEY, JSON.stringify([...done]));
+          stats();
+          render();
+        });
+      });
+    }
+
+    ["search", "difficulty", "sectionFilter", "status"].forEach(id => {
+      document.getElementById(id).addEventListener(id === "search" ? "input" : "change", render);
+    });
+
+    document.getElementById("reset").addEventListener("click", () => {
+      if (confirm("Clear all completion checkboxes for this sheet?")) {
+        done.clear();
+        localStorage.removeItem(KEY);
+        stats();
+        render();
+      }
+    });
+
+    stats();
+    render();
+  </script>
+</body>
+</html>

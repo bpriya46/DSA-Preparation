@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trie (Prefix Tree) — 30 Question Master Sheet</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #fff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --blue: #3157d5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    header {
+      background: #172554;
+      color: #fff;
+      padding: 27px 20px;
+    }
+    header > div, main {
+      max-width: 1180px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 0 0 6px;
+    }
+    header p {
+      margin: 0;
+      color: #dbeafe;
+      max-width: 900px;
+    }
+    main { padding: 20px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .stat, .controls, .section, .note {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+    }
+    .stat { padding: 13px 15px; }
+    .stat strong { display: block; font-size: 23px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .progress {
+      height: 7px;
+      background: #e9edf5;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .bar { height: 100%; background: var(--blue); width: 0; }
+    .controls {
+      padding: 13px;
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .controls input, .controls select, .controls button {
+      font: inherit;
+      border: 1px solid #cfd4dc;
+      background: #fff;
+      border-radius: 9px;
+      padding: 9px 11px;
+      color: var(--ink);
+    }
+    .controls input { flex: 1; min-width: 200px; }
+    .controls button { cursor: pointer; }
+    .section { overflow: hidden; margin-bottom: 17px; }
+    .section-head {
+      padding: 15px 17px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .section-head h2 { font-size: 18px; margin: 0; }
+    .section-head p { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 11px 13px;
+      border-bottom: 1px solid #edf0f4;
+      vertical-align: top;
+    }
+    th {
+      font-size: 11px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: #fafbfc;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .qtitle { font-weight: 650; }
+    .meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .Easy { background: #dcfce7; color: #166534; }
+    .Medium { background: #fef3c7; color: #92400e; }
+    .Hard { background: #fee2e2; color: #991b1b; }
+    .check {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+    .links { white-space: nowrap; }
+    .links a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 650;
+      margin-right: 10px;
+    }
+    .links a:hover { text-decoration: underline; }
+    .empty { padding: 25px; text-align: center; color: var(--muted); }
+    .note { padding: 14px 16px; margin-top: 16px; }
+    .foot { font-size: 12px; color: var(--muted); padding: 10px 2px 20px; }
+    @media (max-width: 760px) {
+      main { padding: 11px; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      table, tbody, tr, td { display: block; width: 100%; }
+      thead { display: none; }
+      tr { padding: 10px; border-bottom: 1px solid var(--line); }
+      td { padding: 4px 9px; border: 0 !important; }
+      td:first-child { display: flex; align-items: flex-start; gap: 9px; }
+      .links { display: flex; gap: 9px; }
+      .section-head { padding: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Trie (Prefix Tree) — 30 Question Master Sheet</h1>
+      <p>A pattern-wise practice sheet covering Trie implementation, prefix search & autocomplete, wildcard word dictionary, Trie + grid backtracking, and Bitwise XOR Tries. Every section progresses Easy → Medium → Hard.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="stats">
+      <div class="stat"><strong id="total">0</strong><span>Total questions</span></div>
+      <div class="stat"><strong id="completed">0</strong><span>Completed</span></div>
+      <div class="stat"><strong id="remaining">0</strong><span>Remaining</span></div>
+      <div class="stat">
+        <strong id="percent">0%</strong><span>Progress</span>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search question, pattern, or keyword…">
+      <select id="difficulty">
+        <option value="">All difficulties</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+      </select>
+      <select id="sectionFilter">
+        <option value="">All patterns</option>
+        <option value="1">1. Trie Implementation & Core Operations</option>
+        <option value="2">2. Prefix / Search / StartsWith & Autocomplete</option>
+        <option value="3">3. Word Dictionary & Wildcard / Pattern Matching</option>
+        <option value="4">4. Trie + DFS / Backtracking on Grid</option>
+        <option value="5">5. Bitwise Trie (Maximum XOR & Range Queries)</option>
+      </select>
+      <select id="status">
+        <option value="">All progress</option>
+        <option value="done">Completed</option>
+        <option value="todo">Not completed</option>
+      </select>
+      <button id="reset" type="button">Reset progress</button>
+    </div>
+
+    <div id="content"></div>
+
+    <div class="note">
+      <b>Suggested approach:</b> Build a clean array-based or map-based TrieNode class first in Implement Trie, then practice DFS branching on wildcard dots (.) and bit-by-bit greedy traversal for XOR problems. Your progress is saved locally in this browser.
+    </div>
+    <div class="foot">
+      GFG links open a targeted GeeksforGeeks search for the question title; verify exact constraints before starting. No repeated question titles.
+    </div>
+  </main>
+
+  <script>
+    const data = [{"id": 1, "section": 1, "pattern": "Trie Implementation & Core Operations", "title": "Longest Common Prefix", "difficulty": "Easy", "slug": "longest-common-prefix"}, {"id": 2, "section": 1, "pattern": "Trie Implementation & Core Operations", "title": "Implement Trie (Prefix Tree)", "difficulty": "Medium", "slug": "implement-trie-prefix-tree"}, {"id": 3, "section": 1, "pattern": "Trie Implementation & Core Operations", "title": "Implement Trie II (Prefix Tree)", "difficulty": "Medium", "slug": "implement-trie-ii-prefix-tree"}, {"id": 4, "section": 1, "pattern": "Trie Implementation & Core Operations", "title": "Design File System", "difficulty": "Medium", "slug": "design-file-system"}, {"id": 5, "section": 1, "pattern": "Trie Implementation & Core Operations", "title": "Delete Duplicate Folders in System", "difficulty": "Hard", "slug": "delete-duplicate-folders-in-system"}, {"id": 6, "section": 2, "pattern": "Prefix / Search / StartsWith & Autocomplete", "title": "Counting Words With a Given Prefix", "difficulty": "Easy", "slug": "counting-words-with-a-given-prefix"}, {"id": 7, "section": 2, "pattern": "Prefix / Search / StartsWith & Autocomplete", "title": "Check If a Word Occurs As a Prefix of Any Word in a Sentence", "difficulty": "Easy", "slug": "check-if-a-word-occurs-as-a-prefix-of-any-word-in-a-sentence"}, {"id": 8, "section": 2, "pattern": "Prefix / Search / StartsWith & Autocomplete", "title": "Longest Word in Dictionary", "difficulty": "Medium", "slug": "longest-word-in-dictionary"}, {"id": 9, "section": 2, "pattern": "Prefix / Search / StartsWith & Autocomplete", "title": "Replace Words", "difficulty": "Medium", "slug": "replace-words"}, {"id": 10, "section": 2, "pattern": "Prefix / Search / StartsWith & Autocomplete", "title": "Search Suggestions System", "difficulty": "Medium", "slug": "search-suggestions-system"}, {"id": 11, "section": 2, "pattern": "Prefix / Search / StartsWith & Autocomplete", "title": "Map Sum Pairs", "difficulty": "Medium", "slug": "map-sum-pairs"}, {"id": 12, "section": 2, "pattern": "Prefix / Search / StartsWith & Autocomplete", "title": "Design Search Autocomplete System", "difficulty": "Hard", "slug": "design-search-autocomplete-system"}, {"id": 13, "section": 2, "pattern": "Prefix / Search / StartsWith & Autocomplete", "title": "Sum of Prefix Scores of Strings", "difficulty": "Hard", "slug": "sum-of-prefix-scores-of-strings"}, {"id": 14, "section": 3, "pattern": "Word Dictionary & Wildcard / Pattern Matching", "title": "Count Prefixes of a Given String", "difficulty": "Easy", "slug": "count-prefixes-of-a-given-string"}, {"id": 15, "section": 3, "pattern": "Word Dictionary & Wildcard / Pattern Matching", "title": "Design Add and Search Words Data Structure", "difficulty": "Medium", "slug": "design-add-and-search-words-data-structure"}, {"id": 16, "section": 3, "pattern": "Word Dictionary & Wildcard / Pattern Matching", "title": "Implement Magic Dictionary", "difficulty": "Medium", "slug": "implement-magic-dictionary"}, {"id": 17, "section": 3, "pattern": "Word Dictionary & Wildcard / Pattern Matching", "title": "Camelcase Matching", "difficulty": "Medium", "slug": "camelcase-matching"}, {"id": 18, "section": 3, "pattern": "Word Dictionary & Wildcard / Pattern Matching", "title": "Short Encoding of Words", "difficulty": "Medium", "slug": "short-encoding-of-words"}, {"id": 19, "section": 3, "pattern": "Word Dictionary & Wildcard / Pattern Matching", "title": "Stream of Characters", "difficulty": "Hard", "slug": "stream-of-characters"}, {"id": 20, "section": 3, "pattern": "Word Dictionary & Wildcard / Pattern Matching", "title": "Prefix and Suffix Search", "difficulty": "Hard", "slug": "prefix-and-suffix-search"}, {"id": 21, "section": 4, "pattern": "Trie + DFS / Backtracking & Word Break", "title": "Count Prefix and Suffix Pairs I", "difficulty": "Easy", "slug": "count-prefix-and-suffix-pairs-i"}, {"id": 22, "section": 4, "pattern": "Trie + DFS / Backtracking & Word Break", "title": "Word Break", "difficulty": "Medium", "slug": "word-break"}, {"id": 23, "section": 4, "pattern": "Trie + DFS / Backtracking & Word Break", "title": "Extra Characters in a String", "difficulty": "Medium", "slug": "extra-characters-in-a-string"}, {"id": 24, "section": 4, "pattern": "Trie + DFS / Backtracking & Word Break", "title": "Word Search II", "difficulty": "Hard", "slug": "word-search-ii"}, {"id": 25, "section": 4, "pattern": "Trie + DFS / Backtracking & Word Break", "title": "Concatenated Words", "difficulty": "Hard", "slug": "concatenated-words"}, {"id": 26, "section": 4, "pattern": "Trie + DFS / Backtracking & Word Break", "title": "Palindrome Pairs", "difficulty": "Hard", "slug": "palindrome-pairs"}, {"id": 27, "section": 5, "pattern": "Bitwise Trie (Maximum XOR & Range Queries)", "title": "XOR Operation in an Array", "difficulty": "Easy", "slug": "xor-operation-in-an-array"}, {"id": 28, "section": 5, "pattern": "Bitwise Trie (Maximum XOR & Range Queries)", "title": "Maximum XOR of Two Numbers in an Array", "difficulty": "Medium", "slug": "maximum-xor-of-two-numbers-in-an-array"}, {"id": 29, "section": 5, "pattern": "Bitwise Trie (Maximum XOR & Range Queries)", "title": "Maximum XOR With an Element From Array", "difficulty": "Hard", "slug": "maximum-xor-with-an-element-from-array"}, {"id": 30, "section": 5, "pattern": "Bitwise Trie (Maximum XOR & Range Queries)", "title": "Count Pairs With XOR in a Range", "difficulty": "Hard", "slug": "count-pairs-with-xor-in-a-range"}].map(q => ({
+      ...q,
+      lc: q.slug ? `https://leetcode.com/problems/${q.slug}/` : `https://leetcode.com/problemset/?search=${encodeURIComponent(q.title)}`,
+      gfg: `https://www.geeksforgeeks.org/search/?q=${encodeURIComponent(q.title)}`
+    }));
+
+    const groups = ["1. Trie Implementation & Core Operations", "2. Prefix / Search / StartsWith & Autocomplete", "3. Word Dictionary & Wildcard / Pattern Matching", "4. Trie + DFS / Backtracking on Grid", "5. Bitwise Trie (Maximum XOR & Range Queries)"];
+
+    data.sort((a, b) => a.section - b.section || ({ Easy: 0, Medium: 1, Hard: 2 }[a.difficulty] - { Easy: 0, Medium: 1, Hard: 2 }[b.difficulty]) || a.id - b.id);
+
+    const KEY = "dsa_trie_master_sheet_progress_v1";
+    const done = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function stats() {
+      const n = done.size;
+      const p = Math.round((n / data.length) * 100);
+      document.getElementById("total").textContent = data.length;
+      document.getElementById("completed").textContent = n;
+      document.getElementById("remaining").textContent = data.length - n;
+      document.getElementById("percent").textContent = p + "%";
+      document.getElementById("bar").style.width = p + "%";
+    }
+
+    function render() {
+      const term = document.getElementById("search").value.toLowerCase().trim();
+      const diff = document.getElementById("difficulty").value;
+      const sec = document.getElementById("sectionFilter").value;
+      const status = document.getElementById("status").value;
+
+      const filtered = data.filter(q =>
+        (!term || (q.title + " " + q.pattern + " " + q.difficulty).toLowerCase().includes(term)) &&
+        (!diff || q.difficulty === diff) &&
+        (!sec || String(q.section) === sec) &&
+        (!status || (status === "done" ? done.has(q.id) : !done.has(q.id)))
+      );
+
+      const root = document.getElementById("content");
+      root.innerHTML = "";
+
+      groups.forEach((g, i) => {
+        const rows = filtered.filter(q => q.section === i + 1);
+        if (!rows.length) return;
+
+        const secEl = document.createElement("section");
+        secEl.className = "section";
+        secEl.innerHTML = `
+          <div class="section-head">
+            <div>
+              <h2>${esc(g)}</h2>
+              <p>${rows.length} matching questions</p>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width:45%">Question / pattern</th>
+                <th>Difficulty</th>
+                <th>Practice links</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map(q => `
+                <tr>
+                  <td>
+                    <div style="display:flex;gap:10px;align-items:flex-start">
+                      <input class="check" type="checkbox" data-id="${q.id}" ${done.has(q.id) ? "checked" : ""} aria-label="Mark ${esc(q.title)} complete">
+                      <div>
+                        <div class="qtitle">${esc(q.title)}</div>
+                        <div class="meta">${esc(q.pattern)}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag ${q.difficulty}">${q.difficulty}</span></td>
+                  <td class="links">
+                    <a href="${esc(q.lc)}" target="_blank" rel="noopener">LeetCode</a>
+                    <a href="${esc(q.gfg)}" target="_blank" rel="noopener">GFG</a>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+        root.appendChild(secEl);
+      });
+
+      if (!root.children.length) {
+        root.innerHTML = '<div class="empty">No questions match these filters.</div>';
+      }
+
+      root.querySelectorAll("input[type=checkbox]").forEach(cb => {
+        cb.addEventListener("change", () => {
+          const id = Number(cb.dataset.id);
+          cb.checked ? done.add(id) : done.delete(id);
+          localStorage.setItem(KEY, JSON.stringify([...done]));
+          stats();
+          render();
+        });
+      });
+    }
+
+    ["search", "difficulty", "sectionFilter", "status"].forEach(id => {
+      document.getElementById(id).addEventListener(id === "search" ? "input" : "change", render);
+    });
+
+    document.getElementById("reset").addEventListener("click", () => {
+      if (confirm("Clear all completion checkboxes for this sheet?")) {
+        done.clear();
+        localStorage.removeItem(KEY);
+        stats();
+        render();
+      }
+    });
+
+    stats();
+    render();
+  </script>
+</body>
+</html>

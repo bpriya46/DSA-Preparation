@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Graphs — 61 Question Master Sheet</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #fff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --blue: #3157d5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    header {
+      background: #172554;
+      color: #fff;
+      padding: 27px 20px;
+    }
+    header > div, main {
+      max-width: 1180px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 0 0 6px;
+    }
+    header p {
+      margin: 0;
+      color: #dbeafe;
+      max-width: 900px;
+    }
+    main { padding: 20px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .stat, .controls, .section, .note {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+    }
+    .stat { padding: 13px 15px; }
+    .stat strong { display: block; font-size: 23px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .progress {
+      height: 7px;
+      background: #e9edf5;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .bar { height: 100%; background: var(--blue); width: 0; }
+    .controls {
+      padding: 13px;
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .controls input, .controls select, .controls button {
+      font: inherit;
+      border: 1px solid #cfd4dc;
+      background: #fff;
+      border-radius: 9px;
+      padding: 9px 11px;
+      color: var(--ink);
+    }
+    .controls input { flex: 1; min-width: 200px; }
+    .controls button { cursor: pointer; }
+    .section { overflow: hidden; margin-bottom: 17px; }
+    .section-head {
+      padding: 15px 17px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .section-head h2 { font-size: 18px; margin: 0; }
+    .section-head p { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 11px 13px;
+      border-bottom: 1px solid #edf0f4;
+      vertical-align: top;
+    }
+    th {
+      font-size: 11px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: #fafbfc;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .qtitle { font-weight: 650; }
+    .meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .Easy { background: #dcfce7; color: #166534; }
+    .Medium { background: #fef3c7; color: #92400e; }
+    .Hard { background: #fee2e2; color: #991b1b; }
+    .check {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+    .links { white-space: nowrap; }
+    .links a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 650;
+      margin-right: 10px;
+    }
+    .links a:hover { text-decoration: underline; }
+    .empty { padding: 25px; text-align: center; color: var(--muted); }
+    .note { padding: 14px 16px; margin-top: 16px; }
+    .foot { font-size: 12px; color: var(--muted); padding: 10px 2px 20px; }
+    @media (max-width: 760px) {
+      main { padding: 11px; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      table, tbody, tr, td { display: block; width: 100%; }
+      thead { display: none; }
+      tr { padding: 10px; border-bottom: 1px solid var(--line); }
+      td { padding: 4px 9px; border: 0 !important; }
+      td:first-child { display: flex; align-items: flex-start; gap: 9px; }
+      .links { display: flex; gap: 9px; }
+      .section-head { padding: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Graphs — 61 Question Master Sheet</h1>
+      <p>A comprehensive pattern-wise practice sheet covering graph representation, BFS/DFS, connected components, cycle detection, topological sort, shortest paths (Dijkstra, Bellman-Ford, Floyd-Warshall), MST, Union-Find, bipartite graphs, and grid/DAG/shortest path problems. Every section includes Easy, Medium, and Hard questions.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="stats">
+      <div class="stat"><strong id="total">0</strong><span>Total questions</span></div>
+      <div class="stat"><strong id="completed">0</strong><span>Completed</span></div>
+      <div class="stat"><strong id="remaining">0</strong><span>Remaining</span></div>
+      <div class="stat">
+        <strong id="percent">0%</strong><span>Progress</span>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search question, pattern, or keyword…">
+      <select id="difficulty">
+        <option value="">All difficulties</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+      </select>
+      <select id="sectionFilter">
+        <option value="">All patterns</option>
+        <option value="1">1. Graph Representation & Modeling</option>
+        <option value="2">2. BFS / DFS Traversals</option>
+        <option value="3">3. Connected Components</option>
+        <option value="4">4. Cycle Detection</option>
+        <option value="5">5. Topological Sort & DAGs</option>
+        <option value="6">6. Shortest Path (Dijkstra, Bellman-Ford, Floyd-Warshall)</option>
+        <option value="7">7. Minimum Spanning Tree (MST)</option>
+        <option value="8">8. Union-Find (Disjoint Set Union)</option>
+        <option value="9">9. Bipartite Graph & Coloring</option>
+        <option value="10">10. Path Problems (Grid, Topological, Shortest & Advanced)</option>
+      </select>
+      <select id="status">
+        <option value="">All progress</option>
+        <option value="done">Completed</option>
+        <option value="todo">Not completed</option>
+      </select>
+      <button id="reset" type="button">Reset progress</button>
+    </div>
+
+    <div id="content"></div>
+
+    <div class="note">
+      <b>Suggested approach:</b> Start with adjacency list construction, multi-source BFS, and DFS cycle/component checks before moving into Kahn's algorithm, Dijkstra/Bellman-Ford/Floyd-Warshall, Kruskal/Prim MST, and DSU. Your progress is saved locally in this browser.
+    </div>
+    <div class="foot">
+      GFG links open a targeted GeeksforGeeks search for the question title; verify exact constraints before starting. No repeated question titles.
+    </div>
+  </main>
+
+  <script>
+    const data = [{"id": 1, "section": 1, "pattern": "Graph Representation & Modeling", "title": "Find if Path Exists in Graph", "difficulty": "Easy", "slug": "find-if-path-exists-in-graph"}, {"id": 2, "section": 1, "pattern": "Graph Representation & Modeling", "title": "Find Center of Star Graph", "difficulty": "Easy", "slug": "find-center-of-star-graph"}, {"id": 3, "section": 1, "pattern": "Graph Representation & Modeling", "title": "Clone Graph", "difficulty": "Medium", "slug": "clone-graph"}, {"id": 4, "section": 1, "pattern": "Graph Representation & Modeling", "title": "Keys and Rooms", "difficulty": "Medium", "slug": "keys-and-rooms"}, {"id": 5, "section": 1, "pattern": "Graph Representation & Modeling", "title": "Graph Valid Tree", "difficulty": "Medium", "slug": "graph-valid-tree"}, {"id": 6, "section": 1, "pattern": "Graph Representation & Modeling", "title": "Minimum Degree of a Connected Trio in a Graph", "difficulty": "Hard", "slug": "minimum-degree-of-a-connected-trio-in-a-graph"}, {"id": 7, "section": 2, "pattern": "BFS / DFS Traversals", "title": "Flood Fill", "difficulty": "Easy", "slug": "flood-fill"}, {"id": 8, "section": 2, "pattern": "BFS / DFS Traversals", "title": "Number of Islands", "difficulty": "Medium", "slug": "number-of-islands"}, {"id": 9, "section": 2, "pattern": "BFS / DFS Traversals", "title": "Rotting Oranges", "difficulty": "Medium", "slug": "rotting-oranges"}, {"id": 10, "section": 2, "pattern": "BFS / DFS Traversals", "title": "01 Matrix", "difficulty": "Medium", "slug": "01-matrix"}, {"id": 11, "section": 2, "pattern": "BFS / DFS Traversals", "title": "Snakes and Ladders", "difficulty": "Medium", "slug": "snakes-and-ladders"}, {"id": 12, "section": 2, "pattern": "BFS / DFS Traversals", "title": "Word Ladder", "difficulty": "Hard", "slug": "word-ladder"}, {"id": 13, "section": 3, "pattern": "Connected Components", "title": "Number of Provinces", "difficulty": "Medium", "slug": "number-of-provinces"}, {"id": 14, "section": 3, "pattern": "Connected Components", "title": "Max Area of Island", "difficulty": "Medium", "slug": "max-area-of-island"}, {"id": 15, "section": 3, "pattern": "Connected Components", "title": "Number of Enclaves", "difficulty": "Medium", "slug": "number-of-enclaves"}, {"id": 16, "section": 3, "pattern": "Connected Components", "title": "Number of Connected Components in an Undirected Graph", "difficulty": "Medium", "slug": "number-of-connected-components-in-an-undirected-graph"}, {"id": 17, "section": 3, "pattern": "Connected Components", "title": "Number of Islands II", "difficulty": "Hard", "slug": "number-of-islands-ii"}, {"id": 18, "section": 3, "pattern": "Connected Components", "title": "Making A Large Island", "difficulty": "Hard", "slug": "making-a-large-island"}, {"id": 19, "section": 3, "pattern": "Connected Components", "title": "Find the Town Judge", "difficulty": "Easy", "slug": "find-the-town-judge"}, {"id": 20, "section": 4, "pattern": "Cycle Detection", "title": "Find Eventual Safe States", "difficulty": "Medium", "slug": "find-eventual-safe-states"}, {"id": 21, "section": 4, "pattern": "Cycle Detection", "title": "Redundant Connection", "difficulty": "Medium", "slug": "redundant-connection"}, {"id": 22, "section": 4, "pattern": "Cycle Detection", "title": "Redundant Connection II", "difficulty": "Hard", "slug": "redundant-connection-ii"}, {"id": 23, "section": 4, "pattern": "Cycle Detection", "title": "Detect Cycles in 2D Grid", "difficulty": "Medium", "slug": "detect-cycles-in-2d-grid"}, {"id": 24, "section": 4, "pattern": "Cycle Detection", "title": "Cycle Length Queries in a Tree", "difficulty": "Hard", "slug": "cycle-length-queries-in-a-tree"}, {"id": 25, "section": 4, "pattern": "Cycle Detection", "title": "Check if There is a Valid Path in a Grid", "difficulty": "Medium", "slug": "check-if-there-is-a-valid-path-in-a-grid"}, {"id": 26, "section": 4, "pattern": "Cycle Detection", "title": "Find if a Graph Has a Cycle", "difficulty": "Easy", "slug": ""}, {"id": 27, "section": 5, "pattern": "Topological Sort & DAGs", "title": "Course Schedule", "difficulty": "Medium", "slug": "course-schedule"}, {"id": 28, "section": 5, "pattern": "Topological Sort & DAGs", "title": "Course Schedule II", "difficulty": "Medium", "slug": "course-schedule-ii"}, {"id": 29, "section": 5, "pattern": "Topological Sort & DAGs", "title": "Course Schedule IV", "difficulty": "Medium", "slug": "course-schedule-iv"}, {"id": 30, "section": 5, "pattern": "Topological Sort & DAGs", "title": "Alien Dictionary", "difficulty": "Hard", "slug": "alien-dictionary"}, {"id": 31, "section": 5, "pattern": "Topological Sort & DAGs", "title": "Parallel Courses III", "difficulty": "Hard", "slug": "parallel-courses-iii"}, {"id": 32, "section": 5, "pattern": "Topological Sort & DAGs", "title": "Build a Matrix With Conditions", "difficulty": "Hard", "slug": "build-a-matrix-with-conditions"}, {"id": 33, "section": 5, "pattern": "Topological Sort & DAGs", "title": "Topological sort", "difficulty": "Easy", "slug": ""}, {"id": 34, "section": 6, "pattern": "Shortest Path (Dijkstra, Bellman-Ford, Floyd-Warshall)", "title": "Network Delay Time", "difficulty": "Medium", "slug": "network-delay-time"}, {"id": 35, "section": 6, "pattern": "Shortest Path (Dijkstra, Bellman-Ford, Floyd-Warshall)", "title": "Cheapest Flights Within K Stops", "difficulty": "Medium", "slug": "cheapest-flights-within-k-stops"}, {"id": 36, "section": 6, "pattern": "Shortest Path (Dijkstra, Bellman-Ford, Floyd-Warshall)", "title": "Path With Minimum Effort", "difficulty": "Medium", "slug": "path-with-minimum-effort"}, {"id": 37, "section": 6, "pattern": "Shortest Path (Dijkstra, Bellman-Ford, Floyd-Warshall)", "title": "Find the City With the Smallest Number of Neighbors at a Threshold Distance", "difficulty": "Medium", "slug": "find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance"}, {"id": 38, "section": 6, "pattern": "Shortest Path (Dijkstra, Bellman-Ford, Floyd-Warshall)", "title": "Shortest Path Visiting All Nodes", "difficulty": "Hard", "slug": "shortest-path-visiting-all-nodes"}, {"id": 39, "section": 6, "pattern": "Shortest Path (Dijkstra, Bellman-Ford, Floyd-Warshall)", "title": "Second Minimum Time to Reach Destination", "difficulty": "Hard", "slug": "second-minimum-time-to-reach-destination"}, {"id": 40, "section": 6, "pattern": "Shortest Path (Dijkstra, Bellman-Ford, Floyd-Warshall)", "title": "Shortest Path in Binary Matrix", "difficulty": "Medium", "slug": "shortest-path-in-binary-matrix"}, {"id": 41, "section": 6, "pattern": "Shortest Path (Dijkstra, Bellman-Ford, Floyd-Warshall)", "title": "Implement Dijkstra Algorithm", "difficulty": "Easy", "slug": ""}, {"id": 42, "section": 7, "pattern": "Minimum Spanning Tree (MST)", "title": "Min Cost to Connect All Points", "difficulty": "Medium", "slug": "min-cost-to-connect-all-points"}, {"id": 43, "section": 7, "pattern": "Minimum Spanning Tree (MST)", "title": "Connecting Cities With Minimum Cost", "difficulty": "Medium", "slug": "connecting-cities-with-minimum-cost"}, {"id": 44, "section": 7, "pattern": "Minimum Spanning Tree (MST)", "title": "Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree", "difficulty": "Hard", "slug": "find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree"}, {"id": 45, "section": 7, "pattern": "Minimum Spanning Tree (MST)", "title": "Minimum Spanning Tree", "difficulty": "Easy", "slug": ""}, {"id": 46, "section": 8, "pattern": "Union-Find (Disjoint Set Union)", "title": "Accounts Merge", "difficulty": "Medium", "slug": "accounts-merge"}, {"id": 47, "section": 8, "pattern": "Union-Find (Disjoint Set Union)", "title": "Most Stones Removed with Same Row or Column", "difficulty": "Medium", "slug": "most-stones-removed-with-same-row-or-column"}, {"id": 48, "section": 8, "pattern": "Union-Find (Disjoint Set Union)", "title": "Satisfiability of Equality Equations", "difficulty": "Medium", "slug": "satisfiability-of-equality-equations"}, {"id": 49, "section": 8, "pattern": "Union-Find (Disjoint Set Union)", "title": "Swim in Rising Water", "difficulty": "Hard", "slug": "swim-in-rising-water"}, {"id": 50, "section": 8, "pattern": "Union-Find (Disjoint Set Union)", "title": "Couples Holding Hands", "difficulty": "Hard", "slug": "couples-holding-hands"}, {"id": 51, "section": 8, "pattern": "Union-Find (Disjoint Set Union)", "title": "Disjoint Set Union", "difficulty": "Easy", "slug": ""}, {"id": 52, "section": 9, "pattern": "Bipartite Graph & Coloring", "title": "Is Graph Bipartite?", "difficulty": "Medium", "slug": "is-graph-bipartite"}, {"id": 53, "section": 9, "pattern": "Bipartite Graph & Coloring", "title": "Possible Bipartition", "difficulty": "Medium", "slug": "possible-bipartition"}, {"id": 54, "section": 9, "pattern": "Bipartite Graph & Coloring", "title": "Flower Planting With No Adjacent", "difficulty": "Medium", "slug": "flower-planting-with-no-adjacent"}, {"id": 55, "section": 9, "pattern": "Bipartite Graph & Coloring", "title": "Maximum Students Taking Exam", "difficulty": "Hard", "slug": "maximum-students-taking-exam"}, {"id": 56, "section": 9, "pattern": "Bipartite Graph & Coloring", "title": "Check if Graph is Bipartite", "difficulty": "Easy", "slug": ""}, {"id": 57, "section": 10, "pattern": "Path Problems (Grid, Topological, Shortest & Advanced)", "title": "All Paths From Source to Target", "difficulty": "Medium", "slug": "all-paths-from-source-to-target"}, {"id": 58, "section": 10, "pattern": "Path Problems (Grid, Topological, Shortest & Advanced)", "title": "Longest Increasing Path in a Matrix", "difficulty": "Hard", "slug": "longest-increasing-path-in-a-matrix"}, {"id": 59, "section": 10, "pattern": "Path Problems (Grid, Topological, Shortest & Advanced)", "title": "Number of Ways to Arrive at Destination", "difficulty": "Medium", "slug": "number-of-ways-to-arrive-at-destination"}, {"id": 60, "section": 10, "pattern": "Path Problems (Grid, Topological, Shortest & Advanced)", "title": "Minimum Cost to Make at Least One Valid Path in a Grid", "difficulty": "Hard", "slug": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid"}, {"id": 61, "section": 10, "pattern": "Path Problems (Grid, Topological, Shortest & Advanced)", "title": "Count Paths in Grid", "difficulty": "Easy", "slug": ""}].map(q => ({
+      ...q,
+      lc: q.slug ? `https://leetcode.com/problems/${q.slug}/` : `https://leetcode.com/problemset/?search=${encodeURIComponent(q.title)}`,
+      gfg: `https://www.geeksforgeeks.org/search/?q=${encodeURIComponent(q.title)}`
+    }));
+
+    const groups = ["1. Graph Representation & Modeling", "2. BFS / DFS Traversals", "3. Connected Components", "4. Cycle Detection", "5. Topological Sort & DAGs", "6. Shortest Path (Dijkstra, Bellman-Ford, Floyd-Warshall)", "7. Minimum Spanning Tree (MST)", "8. Union-Find (Disjoint Set Union)", "9. Bipartite Graph & Coloring", "10. Path Problems (Grid, Topological, Shortest & Advanced)"];
+
+    data.sort((a, b) => a.section - b.section || ({ Easy: 0, Medium: 1, Hard: 2 }[a.difficulty] - { Easy: 0, Medium: 1, Hard: 2 }[b.difficulty]) || a.id - b.id);
+
+    const KEY = "dsa_graph_master_sheet_progress_v1";
+    const done = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function stats() {
+      const n = done.size;
+      const p = Math.round((n / data.length) * 100);
+      document.getElementById("total").textContent = data.length;
+      document.getElementById("completed").textContent = n;
+      document.getElementById("remaining").textContent = data.length - n;
+      document.getElementById("percent").textContent = p + "%";
+      document.getElementById("bar").style.width = p + "%";
+    }
+
+    function render() {
+      const term = document.getElementById("search").value.toLowerCase().trim();
+      const diff = document.getElementById("difficulty").value;
+      const sec = document.getElementById("sectionFilter").value;
+      const status = document.getElementById("status").value;
+
+      const filtered = data.filter(q =>
+        (!term || (q.title + " " + q.pattern + " " + q.difficulty).toLowerCase().includes(term)) &&
+        (!diff || q.difficulty === diff) &&
+        (!sec || String(q.section) === sec) &&
+        (!status || (status === "done" ? done.has(q.id) : !done.has(q.id)))
+      );
+
+      const root = document.getElementById("content");
+      root.innerHTML = "";
+
+      groups.forEach((g, i) => {
+        const rows = filtered.filter(q => q.section === i + 1);
+        if (!rows.length) return;
+
+        const secEl = document.createElement("section");
+        secEl.className = "section";
+        secEl.innerHTML = `
+          <div class="section-head">
+            <div>
+              <h2>${esc(g)}</h2>
+              <p>${rows.length} matching questions</p>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width:45%">Question / pattern</th>
+                <th>Difficulty</th>
+                <th>Practice links</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map(q => `
+                <tr>
+                  <td>
+                    <div style="display:flex;gap:10px;align-items:flex-start">
+                      <input class="check" type="checkbox" data-id="${q.id}" ${done.has(q.id) ? "checked" : ""} aria-label="Mark ${esc(q.title)} complete">
+                      <div>
+                        <div class="qtitle">${esc(q.title)}</div>
+                        <div class="meta">${esc(q.pattern)}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag ${q.difficulty}">${q.difficulty}</span></td>
+                  <td class="links">
+                    <a href="${esc(q.lc)}" target="_blank" rel="noopener">LeetCode</a>
+                    <a href="${esc(q.gfg)}" target="_blank" rel="noopener">GFG</a>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+        root.appendChild(secEl);
+      });
+
+      if (!root.children.length) {
+        root.innerHTML = '<div class="empty">No questions match these filters.</div>';
+      }
+
+      root.querySelectorAll("input[type=checkbox]").forEach(cb => {
+        cb.addEventListener("change", () => {
+          const id = Number(cb.dataset.id);
+          cb.checked ? done.add(id) : done.delete(id);
+          localStorage.setItem(KEY, JSON.stringify([...done]));
+          stats();
+          render();
+        });
+      });
+    }
+
+    ["search", "difficulty", "sectionFilter", "status"].forEach(id => {
+      document.getElementById(id).addEventListener(id === "search" ? "input" : "change", render);
+    });
+
+    document.getElementById("reset").addEventListener("click", () => {
+      if (confirm("Clear all completion checkboxes for this sheet?")) {
+        done.clear();
+        localStorage.removeItem(KEY);
+        stats();
+        render();
+      }
+    });
+
+    stats();
+    render();
+  </script>
+</body>
+</html>

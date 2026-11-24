@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recursion & Backtracking — 50 Question Master Sheet</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #fff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --blue: #3157d5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    header {
+      background: #172554;
+      color: #fff;
+      padding: 27px 20px;
+    }
+    header > div, main {
+      max-width: 1180px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 0 0 6px;
+    }
+    header p {
+      margin: 0;
+      color: #dbeafe;
+      max-width: 900px;
+    }
+    main { padding: 20px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .stat, .controls, .section, .note {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+    }
+    .stat { padding: 13px 15px; }
+    .stat strong { display: block; font-size: 23px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .progress {
+      height: 7px;
+      background: #e9edf5;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .bar { height: 100%; background: var(--blue); width: 0; }
+    .controls {
+      padding: 13px;
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .controls input, .controls select, .controls button {
+      font: inherit;
+      border: 1px solid #cfd4dc;
+      background: #fff;
+      border-radius: 9px;
+      padding: 9px 11px;
+      color: var(--ink);
+    }
+    .controls input { flex: 1; min-width: 200px; }
+    .controls button { cursor: pointer; }
+    .section { overflow: hidden; margin-bottom: 17px; }
+    .section-head {
+      padding: 15px 17px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .section-head h2 { font-size: 18px; margin: 0; }
+    .section-head p { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 11px 13px;
+      border-bottom: 1px solid #edf0f4;
+      vertical-align: top;
+    }
+    th {
+      font-size: 11px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: #fafbfc;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .qtitle { font-weight: 650; }
+    .meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .Easy { background: #dcfce7; color: #166534; }
+    .Medium { background: #fef3c7; color: #92400e; }
+    .Hard { background: #fee2e2; color: #991b1b; }
+    .check {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+    .links { white-space: nowrap; }
+    .links a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 650;
+      margin-right: 10px;
+    }
+    .links a:hover { text-decoration: underline; }
+    .empty { padding: 25px; text-align: center; color: var(--muted); }
+    .note { padding: 14px 16px; margin-top: 16px; }
+    .foot { font-size: 12px; color: var(--muted); padding: 10px 2px 20px; }
+    @media (max-width: 760px) {
+      main { padding: 11px; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      table, tbody, tr, td { display: block; width: 100%; }
+      thead { display: none; }
+      tr { padding: 10px; border-bottom: 1px solid var(--line); }
+      td { padding: 4px 9px; border: 0 !important; }
+      td:first-child { display: flex; align-items: flex-start; gap: 9px; }
+      .links { display: flex; gap: 9px; }
+      .section-head { padding: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Recursion & Backtracking — 50 Question Master Sheet</h1>
+      <p>A structured 8-pattern master sheet covering basic recursion, string recursion, backtracking pruning, subsets, combinations, permutations, grid DFS search, and N-Queens / Sudoku constraint satisfaction. Every section progresses Easy → Medium → Hard.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="stats">
+      <div class="stat"><strong id="total">0</strong><span>Total questions</span></div>
+      <div class="stat"><strong id="completed">0</strong><span>Completed</span></div>
+      <div class="stat"><strong id="remaining">0</strong><span>Remaining</span></div>
+      <div class="stat">
+        <strong id="percent">0%</strong><span>Progress</span>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search question, pattern, or keyword…">
+      <select id="difficulty">
+        <option value="">All difficulties</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+      </select>
+      <select id="sectionFilter">
+        <option value="">All patterns</option>
+        <option value="1">1. Basic Recursion & Mathematical Induction</option>
+        <option value="2">2. String Recursion & Parsing</option>
+        <option value="3">3. Backtracking Foundations (Decision Tree & Pruning)</option>
+        <option value="4">4. Subsets & Power Set Patterns</option>
+        <option value="5">5. Combinations & Target Sum Patterns</option>
+        <option value="6">6. Permutations & Arrangement Patterns</option>
+        <option value="7">7. Grid & Board Search (Word Search & Paths)</option>
+        <option value="8">8. Constraint Satisfaction (N-Queens, Sudoku & Partitioning)</option>
+      </select>
+      <select id="status">
+        <option value="">All progress</option>
+        <option value="done">Completed</option>
+        <option value="todo">Not completed</option>
+      </select>
+      <button id="reset" type="button">Reset progress</button>
+    </div>
+
+    <div id="content"></div>
+
+    <div class="note">
+      <b>Suggested approach:</b> Always write down the recursion state, base case, choice loop, and undo step (pop/unmark) before coding. Sort the input array whenever handling duplicates in Subsets II, Combination Sum II, or Permutations II. Your progress is saved locally in this browser.
+    </div>
+    <div class="foot">
+      GFG links open a targeted GeeksforGeeks search for the question title; verify exact constraints before starting. No repeated question titles.
+    </div>
+  </main>
+
+  <script>
+    const data = [{"id": 1, "section": 1, "pattern": "Basic Recursion & Mathematical Induction", "title": "Fibonacci Number", "difficulty": "Easy", "slug": "fibonacci-number"}, {"id": 2, "section": 1, "pattern": "Basic Recursion & Mathematical Induction", "title": "Power of Two", "difficulty": "Easy", "slug": "power-of-two"}, {"id": 3, "section": 1, "pattern": "Basic Recursion & Mathematical Induction", "title": "Pow(x, n)", "difficulty": "Medium", "slug": "powx-n"}, {"id": 4, "section": 1, "pattern": "Basic Recursion & Mathematical Induction", "title": "Count Good Numbers", "difficulty": "Medium", "slug": "count-good-numbers"}, {"id": 5, "section": 1, "pattern": "Basic Recursion & Mathematical Induction", "title": "Find the Winner of the Circular Game", "difficulty": "Medium", "slug": "find-the-winner-of-the-circular-game"}, {"id": 6, "section": 1, "pattern": "Basic Recursion & Mathematical Induction", "title": "K-th Symbol in Grammar", "difficulty": "Medium", "slug": "k-th-symbol-in-grammar"}, {"id": 7, "section": 1, "pattern": "Basic Recursion & Mathematical Induction", "title": "Integer to English Words", "difficulty": "Hard", "slug": "integer-to-english-words"}, {"id": 8, "section": 2, "pattern": "String Recursion & Parsing", "title": "Reverse String", "difficulty": "Easy", "slug": "reverse-string"}, {"id": 9, "section": 2, "pattern": "String Recursion & Parsing", "title": "Valid Palindrome", "difficulty": "Easy", "slug": "valid-palindrome"}, {"id": 10, "section": 2, "pattern": "String Recursion & Parsing", "title": "Generate Parentheses", "difficulty": "Medium", "slug": "generate-parentheses"}, {"id": 11, "section": 2, "pattern": "String Recursion & Parsing", "title": "Letter Combinations of a Phone Number", "difficulty": "Medium", "slug": "letter-combinations-of-a-phone-number"}, {"id": 12, "section": 2, "pattern": "String Recursion & Parsing", "title": "Decode String", "difficulty": "Medium", "slug": "decode-string"}, {"id": 13, "section": 2, "pattern": "String Recursion & Parsing", "title": "Different Ways to Add Parentheses", "difficulty": "Medium", "slug": "different-ways-to-add-parentheses"}, {"id": 14, "section": 2, "pattern": "String Recursion & Parsing", "title": "Basic Calculator", "difficulty": "Hard", "slug": "basic-calculator"}, {"id": 15, "section": 2, "pattern": "String Recursion & Parsing", "title": "Remove Invalid Parentheses", "difficulty": "Hard", "slug": "remove-invalid-parentheses"}, {"id": 16, "section": 3, "pattern": "Backtracking Foundations (Decision Tree & Pruning)", "title": "Binary Watch", "difficulty": "Easy", "slug": "binary-watch"}, {"id": 17, "section": 3, "pattern": "Backtracking Foundations (Decision Tree & Pruning)", "title": "Restore IP Addresses", "difficulty": "Medium", "slug": "restore-ip-addresses"}, {"id": 18, "section": 3, "pattern": "Backtracking Foundations (Decision Tree & Pruning)", "title": "Split a String Into the Max Number of Unique Substrings", "difficulty": "Medium", "slug": "split-a-string-into-the-max-number-of-unique-substrings"}, {"id": 19, "section": 3, "pattern": "Backtracking Foundations (Decision Tree & Pruning)", "title": "The Number of Beautiful Subsets", "difficulty": "Medium", "slug": "the-number-of-beautiful-subsets"}, {"id": 20, "section": 3, "pattern": "Backtracking Foundations (Decision Tree & Pruning)", "title": "Expression Add Operators", "difficulty": "Hard", "slug": "expression-add-operators"}, {"id": 21, "section": 4, "pattern": "Subsets & Power Set Patterns", "title": "Sum of All Subset XOR Totals", "difficulty": "Easy", "slug": "sum-of-all-subset-xor-totals"}, {"id": 22, "section": 4, "pattern": "Subsets & Power Set Patterns", "title": "Subsets", "difficulty": "Medium", "slug": "subsets"}, {"id": 23, "section": 4, "pattern": "Subsets & Power Set Patterns", "title": "Subsets II", "difficulty": "Medium", "slug": "subsets-ii"}, {"id": 24, "section": 4, "pattern": "Subsets & Power Set Patterns", "title": "Non-decreasing Subsequences", "difficulty": "Medium", "slug": "non-decreasing-subsequences"}, {"id": 25, "section": 4, "pattern": "Subsets & Power Set Patterns", "title": "Find Minimum Time to Finish All Jobs", "difficulty": "Hard", "slug": "find-minimum-time-to-finish-all-jobs"}, {"id": 26, "section": 5, "pattern": "Combinations & Target Sum Patterns", "title": "Pascal's Triangle", "difficulty": "Easy", "slug": "pascals-triangle"}, {"id": 27, "section": 5, "pattern": "Combinations & Target Sum Patterns", "title": "Combinations", "difficulty": "Medium", "slug": "combinations"}, {"id": 28, "section": 5, "pattern": "Combinations & Target Sum Patterns", "title": "Combination Sum", "difficulty": "Medium", "slug": "combination-sum"}, {"id": 29, "section": 5, "pattern": "Combinations & Target Sum Patterns", "title": "Combination Sum II", "difficulty": "Medium", "slug": "combination-sum-ii"}, {"id": 30, "section": 5, "pattern": "Combinations & Target Sum Patterns", "title": "Combination Sum III", "difficulty": "Medium", "slug": "combination-sum-iii"}, {"id": 31, "section": 5, "pattern": "Combinations & Target Sum Patterns", "title": "Shopping Offers", "difficulty": "Medium", "slug": "shopping-offers"}, {"id": 32, "section": 5, "pattern": "Combinations & Target Sum Patterns", "title": "Stickers to Spell Word", "difficulty": "Hard", "slug": "stickers-to-spell-word"}, {"id": 33, "section": 6, "pattern": "Permutations & Arrangement Patterns", "title": "Count Largest Group", "difficulty": "Easy", "slug": "count-largest-group"}, {"id": 34, "section": 6, "pattern": "Permutations & Arrangement Patterns", "title": "Permutations", "difficulty": "Medium", "slug": "permutations"}, {"id": 35, "section": 6, "pattern": "Permutations & Arrangement Patterns", "title": "Permutations II", "difficulty": "Medium", "slug": "permutations-ii"}, {"id": 36, "section": 6, "pattern": "Permutations & Arrangement Patterns", "title": "Letter Tile Possibilities", "difficulty": "Medium", "slug": "letter-tile-possibilities"}, {"id": 37, "section": 6, "pattern": "Permutations & Arrangement Patterns", "title": "Beautiful Arrangement", "difficulty": "Medium", "slug": "beautiful-arrangement"}, {"id": 38, "section": 6, "pattern": "Permutations & Arrangement Patterns", "title": "Permutation Sequence", "difficulty": "Hard", "slug": "permutation-sequence"}, {"id": 39, "section": 7, "pattern": "Grid & Board Search (Word Search & Paths)", "title": "Flood Fill", "difficulty": "Easy", "slug": "flood-fill"}, {"id": 40, "section": 7, "pattern": "Grid & Board Search (Word Search & Paths)", "title": "Word Search", "difficulty": "Medium", "slug": "word-search"}, {"id": 41, "section": 7, "pattern": "Grid & Board Search (Word Search & Paths)", "title": "Path with Maximum Gold", "difficulty": "Medium", "slug": "path-with-maximum-gold"}, {"id": 42, "section": 7, "pattern": "Grid & Board Search (Word Search & Paths)", "title": "Unique Paths III", "difficulty": "Hard", "slug": "unique-paths-iii"}, {"id": 43, "section": 8, "pattern": "Constraint Satisfaction (N-Queens, Sudoku & Partitioning)", "title": "Valid Sudoku", "difficulty": "Medium", "slug": "valid-sudoku"}, {"id": 44, "section": 8, "pattern": "Constraint Satisfaction (N-Queens, Sudoku & Partitioning)", "title": "Palindrome Partitioning", "difficulty": "Medium", "slug": "palindrome-partitioning"}, {"id": 45, "section": 8, "pattern": "Constraint Satisfaction (N-Queens, Sudoku & Partitioning)", "title": "Partition to K Equal Sum Subsets", "difficulty": "Medium", "slug": "partition-to-k-equal-sum-subsets"}, {"id": 46, "section": 8, "pattern": "Constraint Satisfaction (N-Queens, Sudoku & Partitioning)", "title": "Matchsticks to Square", "difficulty": "Medium", "slug": "matchsticks-to-square"}, {"id": 47, "section": 8, "pattern": "Constraint Satisfaction (N-Queens, Sudoku & Partitioning)", "title": "N-Queens", "difficulty": "Hard", "slug": "n-queens"}, {"id": 48, "section": 8, "pattern": "Constraint Satisfaction (N-Queens, Sudoku & Partitioning)", "title": "N-Queens II", "difficulty": "Hard", "slug": "n-queens-ii"}, {"id": 49, "section": 8, "pattern": "Constraint Satisfaction (N-Queens, Sudoku & Partitioning)", "title": "Sudoku Solver", "difficulty": "Hard", "slug": "sudoku-solver"}, {"id": 50, "section": 8, "pattern": "Constraint Satisfaction (N-Queens, Sudoku & Partitioning)", "title": "Check if Every Row and Column Contains All Numbers", "difficulty": "Easy", "slug": "check-if-every-row-and-column-contains-all-numbers"}].map(q => ({
+      ...q,
+      lc: q.slug ? `https://leetcode.com/problems/${q.slug}/` : `https://leetcode.com/problemset/?search=${encodeURIComponent(q.title)}`,
+      gfg: `https://www.geeksforgeeks.org/search/?q=${encodeURIComponent(q.title)}`
+    }));
+
+    const groups = ["1. Basic Recursion & Mathematical Induction", "2. String Recursion & Parsing", "3. Backtracking Foundations (Decision Tree & Pruning)", "4. Subsets & Power Set Patterns", "5. Combinations & Target Sum Patterns", "6. Permutations & Arrangement Patterns", "7. Grid & Board Search (Word Search & Paths)", "8. Constraint Satisfaction (N-Queens, Sudoku & Partitioning)"];
+
+    data.sort((a, b) => a.section - b.section || ({ Easy: 0, Medium: 1, Hard: 2 }[a.difficulty] - { Easy: 0, Medium: 1, Hard: 2 }[b.difficulty]) || a.id - b.id);
+
+    const KEY = "dsa_recursion_backtracking_master_sheet_progress_v1";
+    const done = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function stats() {
+      const n = done.size;
+      const p = Math.round((n / data.length) * 100);
+      document.getElementById("total").textContent = data.length;
+      document.getElementById("completed").textContent = n;
+      document.getElementById("remaining").textContent = data.length - n;
+      document.getElementById("percent").textContent = p + "%";
+      document.getElementById("bar").style.width = p + "%";
+    }
+
+    function render() {
+      const term = document.getElementById("search").value.toLowerCase().trim();
+      const diff = document.getElementById("difficulty").value;
+      const sec = document.getElementById("sectionFilter").value;
+      const status = document.getElementById("status").value;
+
+      const filtered = data.filter(q =>
+        (!term || (q.title + " " + q.pattern + " " + q.difficulty).toLowerCase().includes(term)) &&
+        (!diff || q.difficulty === diff) &&
+        (!sec || String(q.section) === sec) &&
+        (!status || (status === "done" ? done.has(q.id) : !done.has(q.id)))
+      );
+
+      const root = document.getElementById("content");
+      root.innerHTML = "";
+
+      groups.forEach((g, i) => {
+        const rows = filtered.filter(q => q.section === i + 1);
+        if (!rows.length) return;
+
+        const secEl = document.createElement("section");
+        secEl.className = "section";
+        secEl.innerHTML = `
+          <div class="section-head">
+            <div>
+              <h2>${esc(g)}</h2>
+              <p>${rows.length} matching questions</p>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width:45%">Question / pattern</th>
+                <th>Difficulty</th>
+                <th>Practice links</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map(q => `
+                <tr>
+                  <td>
+                    <div style="display:flex;gap:10px;align-items:flex-start">
+                      <input class="check" type="checkbox" data-id="${q.id}" ${done.has(q.id) ? "checked" : ""} aria-label="Mark ${esc(q.title)} complete">
+                      <div>
+                        <div class="qtitle">${esc(q.title)}</div>
+                        <div class="meta">${esc(q.pattern)}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag ${q.difficulty}">${q.difficulty}</span></td>
+                  <td class="links">
+                    <a href="${esc(q.lc)}" target="_blank" rel="noopener">LeetCode</a>
+                    <a href="${esc(q.gfg)}" target="_blank" rel="noopener">GFG</a>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+        root.appendChild(secEl);
+      });
+
+      if (!root.children.length) {
+        root.innerHTML = '<div class="empty">No questions match these filters.</div>';
+      }
+
+      root.querySelectorAll("input[type=checkbox]").forEach(cb => {
+        cb.addEventListener("change", () => {
+          const id = Number(cb.dataset.id);
+          cb.checked ? done.add(id) : done.delete(id);
+          localStorage.setItem(KEY, JSON.stringify([...done]));
+          stats();
+          render();
+        });
+      });
+    }
+
+    ["search", "difficulty", "sectionFilter", "status"].forEach(id => {
+      document.getElementById(id).addEventListener(id === "search" ? "input" : "change", render);
+    });
+
+    document.getElementById("reset").addEventListener("click", () => {
+      if (confirm("Clear all completion checkboxes for this sheet?")) {
+        done.clear();
+        localStorage.removeItem(KEY);
+        stats();
+        render();
+      }
+    });
+
+    stats();
+    render();
+  </script>
+</body>
+</html>

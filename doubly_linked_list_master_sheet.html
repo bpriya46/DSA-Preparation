@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Doubly Linked List (DLL) — 25 Question Master Sheet</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #fff;
+      --ink: #182230;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --blue: #3157d5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    header {
+      background: #172554;
+      color: #fff;
+      padding: 27px 20px;
+    }
+    header > div, main {
+      max-width: 1180px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 0 0 6px;
+    }
+    header p {
+      margin: 0;
+      color: #dbeafe;
+      max-width: 900px;
+    }
+    main { padding: 20px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .stat, .controls, .section, .note {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+    }
+    .stat { padding: 13px 15px; }
+    .stat strong { display: block; font-size: 23px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .progress {
+      height: 7px;
+      background: #e9edf5;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .bar { height: 100%; background: var(--blue); width: 0; }
+    .controls {
+      padding: 13px;
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .controls input, .controls select, .controls button {
+      font: inherit;
+      border: 1px solid #cfd4dc;
+      background: #fff;
+      border-radius: 9px;
+      padding: 9px 11px;
+      color: var(--ink);
+    }
+    .controls input { flex: 1; min-width: 200px; }
+    .controls button { cursor: pointer; }
+    .section { overflow: hidden; margin-bottom: 17px; }
+    .section-head {
+      padding: 15px 17px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .section-head h2 { font-size: 18px; margin: 0; }
+    .section-head p { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 11px 13px;
+      border-bottom: 1px solid #edf0f4;
+      vertical-align: top;
+    }
+    th {
+      font-size: 11px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: #fafbfc;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .qtitle { font-weight: 650; }
+    .meta { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .Easy { background: #dcfce7; color: #166534; }
+    .Medium { background: #fef3c7; color: #92400e; }
+    .Hard { background: #fee2e2; color: #991b1b; }
+    .check {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+    .links { white-space: nowrap; }
+    .links a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 650;
+      margin-right: 10px;
+    }
+    .links a:hover { text-decoration: underline; }
+    .empty { padding: 25px; text-align: center; color: var(--muted); }
+    .note { padding: 14px 16px; margin-top: 16px; }
+    .foot { font-size: 12px; color: var(--muted); padding: 10px 2px 20px; }
+    @media (max-width: 760px) {
+      main { padding: 11px; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      table, tbody, tr, td { display: block; width: 100%; }
+      thead { display: none; }
+      tr { padding: 10px; border-bottom: 1px solid var(--line); }
+      td { padding: 4px 9px; border: 0 !important; }
+      td:first-child { display: flex; align-items: flex-start; gap: 9px; }
+      .links { display: flex; gap: 9px; }
+      .section-head { padding: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Doubly Linked List (DLL) — 25 Question Master Sheet</h1>
+      <p>A focused pattern-wise practice sheet covering DLL pointer operations, reversal & two-pointer pair sums, multilevel & circular DLLs, O(1) LRU/LFU caches, and cursor/bucket DLL data structures. Every section progresses Easy → Medium → Hard.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="stats">
+      <div class="stat"><strong id="total">0</strong><span>Total questions</span></div>
+      <div class="stat"><strong id="completed">0</strong><span>Completed</span></div>
+      <div class="stat"><strong id="remaining">0</strong><span>Remaining</span></div>
+      <div class="stat">
+        <strong id="percent">0%</strong><span>Progress</span>
+        <div class="progress"><div class="bar" id="bar"></div></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search question, pattern, or keyword…">
+      <select id="difficulty">
+        <option value="">All difficulties</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+      </select>
+      <select id="sectionFilter">
+        <option value="">All patterns</option>
+        <option value="1">1. DLL Traversal, Insertion & Deletion Basics</option>
+        <option value="2">2. DLL Reversal, Palindrome & Pair/Triplet Two-Pointers</option>
+        <option value="3">3. Multilevel & Circular Doubly Linked List Manipulation</option>
+        <option value="4">4. O(1) Cache Design (LRU & LFU Cache)</option>
+        <option value="5">5. Browser History, Text Editor & All-O(1) Data Structures</option>
+      </select>
+      <select id="status">
+        <option value="">All progress</option>
+        <option value="done">Completed</option>
+        <option value="todo">Not completed</option>
+      </select>
+      <button id="reset" type="button">Reset progress</button>
+    </div>
+
+    <div id="content"></div>
+
+    <div class="note">
+      <b>Suggested approach:</b> Always use dummy head and dummy tail sentinel nodes when implementing DLLs, LRU/LFU caches, or text editors—sentinels eliminate almost all null-pointer edge cases on head/tail insertions and deletions. Your progress is saved locally in this browser.
+    </div>
+    <div class="foot">
+      GFG links open a targeted GeeksforGeeks search for the question title; verify exact constraints before starting. No repeated question titles.
+    </div>
+  </main>
+
+  <script>
+    const data = [{"id": 1, "section": 1, "pattern": "DLL Traversal, Insertion & Deletion Basics", "title": "Introduction to Doubly Linked List", "difficulty": "Easy", "slug": ""}, {"id": 2, "section": 1, "pattern": "DLL Traversal, Insertion & Deletion Basics", "title": "Delete node in Doubly Linked List", "difficulty": "Easy", "slug": ""}, {"id": 3, "section": 1, "pattern": "DLL Traversal, Insertion & Deletion Basics", "title": "Design Linked List", "difficulty": "Medium", "slug": "design-linked-list"}, {"id": 4, "section": 1, "pattern": "DLL Traversal, Insertion & Deletion Basics", "title": "Design Circular Deque", "difficulty": "Medium", "slug": "design-circular-deque"}, {"id": 5, "section": 1, "pattern": "DLL Traversal, Insertion & Deletion Basics", "title": "Max Stack", "difficulty": "Hard", "slug": "max-stack"}, {"id": 6, "section": 2, "pattern": "DLL Reversal, Palindrome & Pair/Triplet Two-Pointers", "title": "Reverse a Doubly Linked List", "difficulty": "Easy", "slug": ""}, {"id": 7, "section": 2, "pattern": "DLL Reversal, Palindrome & Pair/Triplet Two-Pointers", "title": "Find pairs with given sum in doubly linked list", "difficulty": "Easy", "slug": ""}, {"id": 8, "section": 2, "pattern": "DLL Reversal, Palindrome & Pair/Triplet Two-Pointers", "title": "Remove duplicates from a sorted doubly linked list", "difficulty": "Easy", "slug": ""}, {"id": 9, "section": 2, "pattern": "DLL Reversal, Palindrome & Pair/Triplet Two-Pointers", "title": "Delete all occurrences of a given key in a doubly linked list", "difficulty": "Medium", "slug": ""}, {"id": 10, "section": 2, "pattern": "DLL Reversal, Palindrome & Pair/Triplet Two-Pointers", "title": "Convert Binary Search Tree to Sorted Doubly Linked List", "difficulty": "Medium", "slug": "convert-binary-search-tree-to-sorted-doubly-linked-list"}, {"id": 11, "section": 2, "pattern": "DLL Reversal, Palindrome & Pair/Triplet Two-Pointers", "title": "Reverse Nodes in k-Group", "difficulty": "Hard", "slug": "reverse-nodes-in-k-group"}, {"id": 12, "section": 3, "pattern": "Multilevel & Circular Doubly Linked List Manipulation", "title": "Circular Linked List Traversal", "difficulty": "Easy", "slug": ""}, {"id": 13, "section": 3, "pattern": "Multilevel & Circular Doubly Linked List Manipulation", "title": "Flatten a Multilevel Doubly Linked List", "difficulty": "Medium", "slug": "flatten-a-multilevel-doubly-linked-list"}, {"id": 14, "section": 3, "pattern": "Multilevel & Circular Doubly Linked List Manipulation", "title": "Insert into a Sorted Circular Linked List", "difficulty": "Medium", "slug": "insert-into-a-sorted-circular-linked-list"}, {"id": 15, "section": 3, "pattern": "Multilevel & Circular Doubly Linked List Manipulation", "title": "Merge k Sorted Lists", "difficulty": "Hard", "slug": "merge-k-sorted-lists"}, {"id": 16, "section": 4, "pattern": "O(1) Cache Design (LRU & LFU Cache)", "title": "Design HashMap", "difficulty": "Easy", "slug": "design-hashmap"}, {"id": 17, "section": 4, "pattern": "O(1) Cache Design (LRU & LFU Cache)", "title": "LRU Cache", "difficulty": "Medium", "slug": "lru-cache"}, {"id": 18, "section": 4, "pattern": "O(1) Cache Design (LRU & LFU Cache)", "title": "Design Most Recently Used Queue", "difficulty": "Medium", "slug": "design-most-recently-used-queue"}, {"id": 19, "section": 4, "pattern": "O(1) Cache Design (LRU & LFU Cache)", "title": "LFU Cache", "difficulty": "Hard", "slug": "lfu-cache"}, {"id": 20, "section": 5, "pattern": "Browser History, Text Editor & All-O(1) Data Structures", "title": "Implement Stack using Queues", "difficulty": "Easy", "slug": "implement-stack-using-queues"}, {"id": 21, "section": 5, "pattern": "Browser History, Text Editor & All-O(1) Data Structures", "title": "Design Browser History", "difficulty": "Medium", "slug": "design-browser-history"}, {"id": 22, "section": 5, "pattern": "Browser History, Text Editor & All-O(1) Data Structures", "title": "Design Front Middle Back Queue", "difficulty": "Medium", "slug": "design-front-middle-back-queue"}, {"id": 23, "section": 5, "pattern": "Browser History, Text Editor & All-O(1) Data Structures", "title": "Design a Text Editor", "difficulty": "Hard", "slug": "design-a-text-editor"}, {"id": 24, "section": 5, "pattern": "Browser History, Text Editor & All-O(1) Data Structures", "title": "All O`one Data Structure", "difficulty": "Hard", "slug": "all-oone-data-structure"}, {"id": 25, "section": 5, "pattern": "Browser History, Text Editor & All-O(1) Data Structures", "title": "Dinner Plate Stacks", "difficulty": "Hard", "slug": "dinner-plate-stacks"}].map(q => ({
+      ...q,
+      lc: q.slug ? `https://leetcode.com/problems/${q.slug}/` : `https://leetcode.com/problemset/?search=${encodeURIComponent(q.title)}`,
+      gfg: `https://www.geeksforgeeks.org/search/?q=${encodeURIComponent(q.title)}`
+    }));
+
+    const groups = ["1. DLL Traversal, Insertion & Deletion Basics", "2. DLL Reversal, Palindrome & Pair/Triplet Two-Pointers", "3. Multilevel & Circular Doubly Linked List Manipulation", "4. O(1) Cache Design (LRU & LFU Cache)", "5. Browser History, Text Editor & All-O(1) Data Structures"];
+
+    data.sort((a, b) => a.section - b.section || ({ Easy: 0, Medium: 1, Hard: 2 }[a.difficulty] - { Easy: 0, Medium: 1, Hard: 2 }[b.difficulty]) || a.id - b.id);
+
+    const KEY = "dsa_dll_master_sheet_progress_v1";
+    const done = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function stats() {
+      const n = done.size;
+      const p = Math.round((n / data.length) * 100);
+      document.getElementById("total").textContent = data.length;
+      document.getElementById("completed").textContent = n;
+      document.getElementById("remaining").textContent = data.length - n;
+      document.getElementById("percent").textContent = p + "%";
+      document.getElementById("bar").style.width = p + "%";
+    }
+
+    function render() {
+      const term = document.getElementById("search").value.toLowerCase().trim();
+      const diff = document.getElementById("difficulty").value;
+      const sec = document.getElementById("sectionFilter").value;
+      const status = document.getElementById("status").value;
+
+      const filtered = data.filter(q =>
+        (!term || (q.title + " " + q.pattern + " " + q.difficulty).toLowerCase().includes(term)) &&
+        (!diff || q.difficulty === diff) &&
+        (!sec || String(q.section) === sec) &&
+        (!status || (status === "done" ? done.has(q.id) : !done.has(q.id)))
+      );
+
+      const root = document.getElementById("content");
+      root.innerHTML = "";
+
+      groups.forEach((g, i) => {
+        const rows = filtered.filter(q => q.section === i + 1);
+        if (!rows.length) return;
+
+        const secEl = document.createElement("section");
+        secEl.className = "section";
+        secEl.innerHTML = `
+          <div class="section-head">
+            <div>
+              <h2>${esc(g)}</h2>
+              <p>${rows.length} matching questions</p>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width:45%">Question / pattern</th>
+                <th>Difficulty</th>
+                <th>Practice links</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map(q => `
+                <tr>
+                  <td>
+                    <div style="display:flex;gap:10px;align-items:flex-start">
+                      <input class="check" type="checkbox" data-id="${q.id}" ${done.has(q.id) ? "checked" : ""} aria-label="Mark ${esc(q.title)} complete">
+                      <div>
+                        <div class="qtitle">${esc(q.title)}</div>
+                        <div class="meta">${esc(q.pattern)}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="tag ${q.difficulty}">${q.difficulty}</span></td>
+                  <td class="links">
+                    <a href="${esc(q.lc)}" target="_blank" rel="noopener">LeetCode</a>
+                    <a href="${esc(q.gfg)}" target="_blank" rel="noopener">GFG</a>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+        root.appendChild(secEl);
+      });
+
+      if (!root.children.length) {
+        root.innerHTML = '<div class="empty">No questions match these filters.</div>';
+      }
+
+      root.querySelectorAll("input[type=checkbox]").forEach(cb => {
+        cb.addEventListener("change", () => {
+          const id = Number(cb.dataset.id);
+          cb.checked ? done.add(id) : done.delete(id);
+          localStorage.setItem(KEY, JSON.stringify([...done]));
+          stats();
+          render();
+        });
+      });
+    }
+
+    ["search", "difficulty", "sectionFilter", "status"].forEach(id => {
+      document.getElementById(id).addEventListener(id === "search" ? "input" : "change", render);
+    });
+
+    document.getElementById("reset").addEventListener("click", () => {
+      if (confirm("Clear all completion checkboxes for this sheet?")) {
+        done.clear();
+        localStorage.removeItem(KEY);
+        stats();
+        render();
+      }
+    });
+
+    stats();
+    render();
+  </script>
+</body>
+</html>
