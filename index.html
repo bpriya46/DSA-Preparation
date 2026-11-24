@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Preparation | Practice Hub</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6fb;
+  color: #202b40;
+}
+header {
+  background: linear-gradient(120deg,#14264e,#345bd5);
+  color: white;
+  padding: 55px 20px;
+  text-align: center;
+}
+header h1 { font-size: 38px; margin: 0 0 12px; }
+header p { color: #e0e8ff; margin: 0; }
+main { max-width: 1100px; margin: 35px auto; padding: 0 20px; }
+.search {
+  width: 100%; padding: 14px; border: 1px solid #dce2ed;
+  border-radius: 10px; font-size: 16px; margin-bottom: 22px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+  gap: 17px;
+}
+.card {
+  display: block; background: white; padding: 22px;
+  border-radius: 13px; text-decoration: none; color: #202b40;
+  border: 1px solid #e4e9f2;
+  box-shadow: 0 3px 12px #18294b0b;
+  transition: .2s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #6686e8;
+  box-shadow: 0 7px 20px #18294b18;
+}
+.number { color: #345bd5; font-weight: bold; font-size: 13px; }
+.card h3 { margin: 12px 0 5px; }
+.card p { color: #718096; font-size: 13px; margin: 0; }
+footer { text-align:center; padding:30px; color:#718096; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>DSA Preparation</h1>
+  <p>Your complete Data Structures & Algorithms practice library</p>
+  <p>15 Topics | Pattern-wise Learning | LeetCode & GFG</p>
+</header>
+
+<main>
+  <input class="search" id="search" placeholder="Search DSA topics..." oninput="filterTopics()">
+
+  <section class="grid" id="topics">
+    <a class="card" href="array_100_master_sheet%20%286%29.html"><span class="number">01</span><h3>Arrays</h3><p>Array patterns and problems</p></a>
+    <a class="card" href="string_50_master_sheet.html"><span class="number">02</span><h3>Strings</h3><p>String patterns and problems</p></a>
+    <a class="card" href="sorting_master_sheet_sorted%20%281%29.html"><span class="number">03</span><h3>Sorting</h3><p>Sorting algorithms and techniques</p></a>
+    <a class="card" href="hashing_master_sheet_sorted.html"><span class="number">04</span><h3>Hashing</h3><p>Maps, sets and frequency patterns</p></a>
+    <a class="card" href="linked_list_master_sheet.html"><span class="number">05</span><h3>Linked List</h3><p>Singly linked list</p></a>
+    <a class="card" href="doubly_linked_list_master_sheet.html"><span class="number">06</span><h3>Doubly Linked List</h3><p>Doubly linked list patterns</p></a>
+    <a class="card" href="stack_queue_master_sheet.html"><span class="number">07</span><h3>Stack & Queue</h3><p>Stack and queue problems</p></a>
+    <a class="card" href="trees_bst_master_sheet-v3.html"><span class="number">08</span><h3>Trees & BST</h3><p>Tree traversals and BST</p></a>
+    <a class="card" href="advanced_ds_design_master_sheet-v2.html"><span class="number">09</span><h3>Advanced DS Design</h3><p>Data structure design problems</p></a>
+    <a class="card" href="math_number_theory_master_sheet-v2.html"><span class="number">10</span><h3>Math & Number Theory</h3><p>Mathematical concepts and problems</p></a>
+    <a class="card" href="greedy_master_sheet-v2.html"><span class="number">11</span><h3>Greedy</h3><p>Greedy algorithms and patterns</p></a>
+    <a class="card" href="binary_search_master_sheet.html"><span class="number">12</span><h3>Binary Search</h3><p>Search space and binary search</p></a>
+    <a class="card" href="graph_master_sheet.html"><span class="number">13</span><h3>Graph</h3><p>Graph traversal and algorithms</p></a>
+    <a class="card" href="recursion_backtracking_master_sheet.html"><span class="number">14</span><h3>Recursion & Backtracking</h3><p>Recursive problem solving</p></a>
+    <a class="card" href="trie_master_sheet.html"><span class="number">15</span><h3>Trie</h3><p>Prefix tree problems</p></a>
+  </section>
+  <p id="empty" style="display:none;text-align:center;color:#718096;">No topics found.</p>
+</main>
+
+<footer>DSA Preparation | Keep Learning. Keep Practising.</footer>
+
+<script>
+function filterTopics() {
+  const query = document.getElementById("search").value.toLowerCase();
+  const cards = document.querySelectorAll(".card");
+  let visible = 0;
+  cards.forEach(card => {
+    const match = card.innerText.toLowerCase().includes(query);
+    card.style.display = match ? "block" : "none";
+    if (match) visible++;
+  });
+  document.getElementById("empty").style.display = visible ? "none" : "block";
+}
+</script>
+
+</body>
+</html>
